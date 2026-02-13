@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>¿Quieres ser mi San Valentín?</title>
+
+<style>
+body {
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+    text-align: center;
+    padding: 40px;
+}
+
+.card {
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    max-width: 420px;
+    margin: auto;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    position: relative;
+}
+
+h1 {
+    color: #d6336c;
+}
+
+.osito {
+    width: 220px;
+    animation: flotar 2s infinite ease-in-out;
+}
+
+@keyframes flotar {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.si {
+    background-color: #ff69b4;
+    color: white;
+}
+
+.no {
+    background-color: #ddd;
+    position: absolute;
+}
+
+#mensaje {
+    margin-top: 25px;
+    font-size: 20px;
+    color: #d6336c;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <img class="osito" src="https://i.imgur.com/0KQ0Z8H.png" alt="Osito tierno">
+    <h1>¿Quieres ser mi San Valentín? 💕</h1>
+
+    <button class="si" onclick="aceptar()">Sí 🧸❤️</button>
+    <button class="no" id="noBtn" onmouseover="moverNo()">No 💔</button>
+
+    <div id="mensaje"></div>
+</div>
+
+<audio autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function aceptar() {
+    localStorage.setItem("respuestaSanValentin", "SÍ 💖");
+    document.getElementById("mensaje").innerHTML =
+        "💘 ¡Sabía que dirías que sí! 💘<br>Te amo 🧸💕";
+
+    let texto = encodeURIComponent("🧸💖 ¡Dijo que SÍ! Aceptó ser mi San Valentín 💕");
+    window.open("https://wa.me/?text=" + texto, "_blank");
+}
+
+function moverNo() {
+    let btn = document.getElementById("noBtn");
+    let x = Math.random() * 250;
+    let y = Math.random() * 250;
+    btn.style.left = x + "px";
+    btn.style.top = y + "px";
+}
+
+window.onload = function() {
+    let respuesta = localStorage.getItem("respuestaSanValentin");
+    if (respuesta) {
+        document.getElementById("mensaje").innerHTML =
+            "Respuesta guardada: <b>" + respuesta + "</b> 🧸💕";
+    }
+}
+</script>
+
+</body>
+</html>
